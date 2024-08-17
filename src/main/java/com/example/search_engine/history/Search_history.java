@@ -1,10 +1,12 @@
 package com.example.search_engine.history;
 
+import com.example.search_engine.model.User;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Column;
+import jakarta.persistence.ManyToOne;
 import java.time.LocalDateTime;
 
 @Entity
@@ -19,8 +21,12 @@ public class Search_history {
 
     @Column(name = "SEARCH_TIME", nullable = false)
     private LocalDateTime searchTime;
+
+    @Column(name = "QUERY")
     private String query;
 
+    @ManyToOne
+    private User user;
 
     public Long getId() {
         return id;
@@ -30,7 +36,7 @@ public class Search_history {
         this.id = id;
     }
 
-    public String getSearchTerm(String query) {
+    public String getSearchTerm() {
         return searchTerm;
     }
 
@@ -46,11 +52,20 @@ public class Search_history {
         this.searchTime = searchTime;
     }
 
-    public void setQuery(String query) {
-        this.query=query;
+    public String getQuery() {
+        return query;
     }
 
-    public char[] getSearchTerm() {
-        return searchTerm.toCharArray();
+    public void setQuery(String query) {
+        this.query = query;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }
+
